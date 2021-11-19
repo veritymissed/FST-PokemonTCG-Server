@@ -18,11 +18,15 @@ export class UsersService {
   ];
 
   create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+    console.log(`This action adds a new user
+     username: ${createUserDto.username}
+     password: ${createUserDto.password}`);
+    return this.users.push(createUserDto)
   }
 
   findAll() {
-    return `This action returns all users`;
+    console.log(`This action returns all users`);
+    return this.users
   }
 
   findOne(id: number) {
