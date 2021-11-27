@@ -1,4 +1,4 @@
-import { Controller, Request, Get, Post, UseGuards } from '@nestjs/common';
+import { Controller, Request, Response, Get, Post, UseGuards, HttpStatus } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
 import { LocalAuthGuard } from './auth/guards/local-auth.guard'
@@ -18,8 +18,21 @@ export class AppController {
 
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
-  async login(@Request() req) {
-    return this.authService.login(req.body);
+  async login(@Request() req, @Response() res) {
+    try {
+      let result = await this.authService.login(req.body);
+
+      return res
+      .status(HttpStatus.OK)
+      .cookie('access_token', result.access_token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production"
+      })
+      .json(result)
+
+    } catch (error) {
+      throw error
+    }
   }
 
   @UseGuards(JwtAuthGuard)

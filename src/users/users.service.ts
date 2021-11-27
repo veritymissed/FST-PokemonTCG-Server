@@ -4,9 +4,13 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import {getManager, getConnection} from "typeorm";
 import { User } from './entities/user.entity';
+// import * as favorite_cards from './favorite_cards.json';
 
 @Injectable()
 export class UsersService {
+  constructor(){
+    // console.log('favorite_cards', favorite_cards)
+  }
   private readonly users = [
     {
       id: uuidv4(),
@@ -67,10 +71,14 @@ export class UsersService {
   }
 
   async findOneByEmail(userEmail: string){
-    const entityManager = getManager();
-    const user = await entityManager.findOne(User, {email: userEmail});
-    console.log('user in postgres', user);
-    return user;
+    try {
+      const entityManager = getManager();
+      const user = await entityManager.findOne(User, {email: userEmail});
+      console.log('user in postgres', user);
+      return user;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
