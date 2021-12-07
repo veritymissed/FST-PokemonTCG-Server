@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -28,14 +28,20 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto) {
     try {
-      console.log(`This action adds a new user
-        username: ${createUserDto.username}
-        password: ${createUserDto.password}`);
+
+      let userExistInDatabase = await this.findOneByEmail(createUserDto.email);
+      console.log("!userExistInDatabase", !userExistInDatabase)
+      if(userExistInDatabase) {
+        throw new BadRequestException("Email have been registered.");
+      }
+
       const entityManager = getManager();
       const {id, ...newUser} = createUserDto;
-      const result = await entityManager.insert(User, newUser);
-      return result;
 
+      const result = await entityManager.insert(User, newUser);
+      console.log('result in create user', result)
+      return result;
+      
     } catch (error) {
       throw error;
     }
@@ -77,11 +83,14 @@ export class UsersService {
       console.log('user in postgres', user);
       return user;
     } catch (error) {
+      console.log(error)
       throw error;
     }
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
+    console.log('id', id)
+    console.log('updateUserDto', updateUserDto)
     try {
       const result = await getConnection()
       .createQueryBuilder()

@@ -36,6 +36,7 @@ export class AppController {
       .json(resObject)
 
     } catch (error) {
+      console.log(error)
       throw error
     }
   }
