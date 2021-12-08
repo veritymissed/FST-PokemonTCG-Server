@@ -13,10 +13,11 @@ export class AppController {
     private readonly usersService: UsersService
   ) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
+  //If you don't config serve static (ex. SPA), un-commit this  
+  // @Get()
+  // getHello(): string {
+  //   return this.appService.getHello();
+  // }
 
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
