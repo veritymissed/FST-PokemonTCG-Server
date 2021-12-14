@@ -5,6 +5,11 @@ import { LocalAuthGuard } from './auth/guards/local-auth.guard'
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard'
 import { UsersService } from './users/users.service';
 
+//for userRole authorization
+import { UserRoles } from './userRole/userRole.decorator';
+import { UserRole } from './userRole/userRole.enum';
+import { RolesGuard } from './userRole/userRoles.guard'
+
 @Controller()
 export class AppController {
   constructor(
@@ -13,7 +18,7 @@ export class AppController {
     private readonly usersService: UsersService
   ) {}
 
-  //If you don't config serve static (ex. SPA), un-commit this  
+  //If you don't config serve static (ex. SPA), un-commit this
   // @Get()
   // getHello(): string {
   //   return this.appService.getHello();
@@ -42,9 +47,13 @@ export class AppController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
+  // used in /api prefix controller
+
+  // @UseGuards(RolesGuard)
   @Get('profile')
+  // @UserRoles(UserRole.ADMIN)
   getProfile(@Request() req){
-    return req.body
+    return 'take the profile back'
   }
 }
