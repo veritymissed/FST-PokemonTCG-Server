@@ -8,9 +8,9 @@ import csurf from 'csurf';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {cors: true});
   const configService = app.get(ConfigService);
-  app.use(helmet());
+  // app.use(helmet());
   app.use(cookieParser());
-  app.use(csurf());
+  // app.use(csurf({ cookie: true }));
   await app.listen(configService.get('port'));
 }
 bootstrap();
