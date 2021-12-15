@@ -20,7 +20,10 @@ $ cp -r ${FST-PokemonTCG-SPA-DIR}/build/* ${FST-PokemonTCG-server-DIR}/client/
 ## Building and running with Docker
 
 ```sh
-$ docker-compose up -d (daemon)
+
+# docker-compose would load the .env.prod in ./configs/
+
+$ docker-compose --env-file ./configs/.env.prod up
 
 # the server with front-end SPA is running default on the localhost:3000
 ```
@@ -30,7 +33,7 @@ After builded server container success:
 
 You can see the home page in `localhost:3000`
 
-![Query](https://user-images.githubusercontent.com/6461602/146106069-3fe3e021-6a56-481e-8404-0a03dca85b71.png)
+![Query](https://user-images.githubusercontent.com/6461602/146149179-d3fe91c6-b0a4-42e7-b339-558e82904f83.png)
 
 ## Installation
 
