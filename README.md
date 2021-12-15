@@ -24,6 +24,13 @@ $ docker-compose up -d (daemon)
 
 # the server with front-end SPA is running default on the localhost:3000
 ```
+After builded server container success:
+
+![build](https://user-images.githubusercontent.com/6461602/146146994-1e7a8031-662f-4c3c-b565-64e9e63d3444.png)
+
+You can see the home page in `localhost:3000`
+
+![Query](https://user-images.githubusercontent.com/6461602/146106069-3fe3e021-6a56-481e-8404-0a03dca85b71.png)
 
 ## Installation
 
