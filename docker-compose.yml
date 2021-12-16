@@ -10,6 +10,7 @@ services:
     ports:
       - '3000:3000'
     command: yarn run start:dev
+    env_file: ./configs/.env.prod
   postgres:
     image: postgres:12
     restart: always

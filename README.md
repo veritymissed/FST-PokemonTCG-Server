@@ -41,9 +41,9 @@ Services:
 ```sh
 $ cp ./docker-compose-files/docker-compose.prod.yml docker-compose.yml
 
-# docker-compose would load the .env.prod in ./configs/
+# docker-compose.prod.yml would load the .env.prod in ./configs/
 
-$ docker-compose --env-file ./configs/.env.prod up
+$ docker-compose up
 
 # the server with front-end SPA is running default on the localhost:3000
 ```
