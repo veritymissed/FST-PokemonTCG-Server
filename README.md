@@ -1,7 +1,5 @@
 # FST Pokemontcg server
 
-## Description
-
 FST Pokemontcg server using the
 [NestJS](https://github.com/nestjs/nest) as the server framework.
 
@@ -17,9 +15,31 @@ The source of the FST PokemonTCG front-end SPA:
 $ cp -r ${FST-PokemonTCG-SPA-DIR}/build/* ${FST-PokemonTCG-server-DIR}/client/
 ```
 
+## Services in docker-compose files
+
+#### Production
+`./docker-compose-files/docker-compose.prod.yml`
+
+Services:
+- PokemonTCG server with client SPA
+- postgres
+- redis
+- Hasura GUI (graphql-engine)
+
+
+#### Dev
+`./docker-compose-files/docker-compose.dev.yml`
+
+Services:
+- postgres
+- redis
+- Hasura GUI (graphql-engine)
+
+
 ## Building and running with Docker
 
 ```sh
+$ cp ./docker-compose-files/docker-compose.prod.yml docker-compose.yml
 
 # docker-compose would load the .env.prod in ./configs/
 
@@ -35,7 +55,16 @@ You can see the home page in `localhost:3000`
 
 ![Query](https://user-images.githubusercontent.com/6461602/146149179-d3fe91c6-b0a4-42e7-b339-558e82904f83.png)
 
-## Installation
+## Development
+
+```sh
+$ cp ./docker-compose-files/docker-compose.dev.yml docker-compose.yml
+```
+
+The `docker-compose.yml` just running the Postgres/Redis stack, without the `pokemontcg-node-docker` container
+
+
+#### Installation
 
 ```bash
 $ npm install
